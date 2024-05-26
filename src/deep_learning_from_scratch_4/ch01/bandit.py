@@ -7,6 +7,9 @@ class Bandit:
     def __init__(self, arms=10):
         self.rates = np.random.rand(arms)
 
+    def reset(self):
+        self.rates = np.random.rand(len(self.rates))
+
     def play(self, arm):
         rate = self.rates[arm]
         if rate > np.random.rand():
@@ -17,8 +20,14 @@ class Bandit:
 class Agent:
     def __init__(self, epsilon, action_size=10):
         self.episilon = epsilon
-        self.Qs = np.zeros(action_size)
-        self.ns = np.zeros(action_size)
+        self.action_size = action_size
+        self.reset()
+        # self.Qs = np.zeros(action_size)
+        # self.ns = np.zeros(action_size)
+
+    def reset(self):
+        self.Qs = np.zeros(self.action_size)
+        self.ns = np.zeros(self.action_size)
 
     def update(self, action, reward):
         self.ns[action] += 1

@@ -5,15 +5,17 @@ from tqdm import tqdm
 from deep_learning_from_scratch_4.ch01.bandit import Agent, Bandit
 
 
-def play():
-    runs = 200
-    steps = 1000
-    epsilon = 0.1
+def play(bandit=Bandit(), agent=Agent(epsilon=0.1), runs=200, steps=1000):
+    # runs = 200
+    # steps = 1000
+    # epsilon = 0.1
     all_rates = np.zeros((runs, steps))
 
     for run in tqdm(range(runs)):
-        bandit = Bandit()
-        agent = Agent(epsilon)
+        # bandit = bandit_class()
+        # agent = agent_class(epsilon)
+        agent.reset()
+        bandit.reset()
         total_reward = 0
         rates = []
 
@@ -31,6 +33,8 @@ def play():
     plt.xlabel("steps")
     plt.plot(avg_rates)
     plt.show()
+
+    return avg_rates
 
 
 if __name__ == "__main__":
